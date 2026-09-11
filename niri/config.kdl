@@ -281,6 +281,7 @@ layout {
 spawn-at-startup "waybar"
 spawn-at-startup "hyprpolkitagent"
 spawn-at-startup "dunst"
+spawn-at-startup "swayosd-server"
 spawn-sh-at-startup "swaybg -i /home/noti/Downloads/wallhaven-3qrdr6_1920x1080.png"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
