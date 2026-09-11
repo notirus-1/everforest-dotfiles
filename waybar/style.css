@@ -1,0 +1,291 @@
+@define-color bg        #272e33;
+@define-color bg0       #1e2326;
+@define-color bg1       #2d353b;
+@define-color bg2       #374145;
+
+@define-color fg        #d3c6aa;
+@define-color muted     #859289;
+
+@define-color green     #a7c080;
+@define-color aqua      #83c092;
+@define-color blue      #7fbbb3;
+@define-color yellow    #dbbc7f;
+@define-color orange    #e69875;
+@define-color red       #e67e80;
+@define-color purple    #d699b6;
+
+
+/* ─────────────────────────────────────────────
+   GLOBAL
+   ───────────────────────────────────────────── */
+
+* {
+    border: none;
+    border-radius: 0;
+
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 12px;
+    font-weight: 600;
+
+    min-height: 0;
+}
+
+
+/* ─────────────────────────────────────────────
+   WAYBAR
+   ───────────────────────────────────────────── */
+
+window#waybar {
+    background: transparent;
+    color: @fg;
+}
+
+
+/* ─────────────────────────────────────────────
+   COMMON MODULE STYLE
+   ───────────────────────────────────────────── */
+
+#workspaces,
+#window,
+#mpris,
+#clock,
+#custom-dunst,
+#custom-gpu,
+#cpu,
+#memory,
+#temperature,
+#network,
+#pulseaudio,
+#tray {
+    background: @bg;
+
+    margin: 0 2px;
+    padding: 0 10px;
+
+    border: 1px solid @bg2;
+}
+/* ─────────────────────────────────────────────
+   MPRIS
+   ───────────────────────────────────────────── */
+
+#mpris {
+    color: @green;
+    border-top: 2px solid @green;
+}
+
+#mpris.paused {
+    color: @muted;
+    border-top: 2px solid @muted;
+}
+
+/* ─────────────────────────────────────────────
+   WORKSPACES
+   ───────────────────────────────────────────── */
+
+#workspaces {
+    padding: 0 3px;
+}
+
+#workspaces button {
+    color: @muted;
+
+    padding: 0 9px;
+    margin: 3px 1px;
+
+    background: transparent;
+}
+
+#workspaces button:hover {
+    color: @fg;
+    background: @bg1;
+}
+
+#workspaces button.active {
+    color: @bg0;
+    background: @green;
+}
+
+#workspaces button.urgent {
+    color: @bg0;
+    background: @red;
+}
+
+
+/* ─────────────────────────────────────────────
+   WINDOW TITLE
+   ───────────────────────────────────────────── */
+
+#window {
+    color: @muted;
+
+    border-left: 2px solid @green;
+
+    padding-left: 12px;
+}
+
+window#waybar.empty #window {
+    background: transparent;
+    border: none;
+}
+
+
+/* ─────────────────────────────────────────────
+   CLOCK
+   ───────────────────────────────────────────── */
+
+#clock {
+    color: @yellow;
+
+    border-top: 2px solid @yellow;
+
+    padding-left: 14px;
+    padding-right: 14px;
+}
+
+
+/* ─────────────────────────────────────────────
+   DUNST
+   ───────────────────────────────────────────── */
+
+#custom-dunst {
+    color: @purple;
+
+    border-top: 2px solid @purple;
+}
+
+#custom-dunst:hover {
+    color: @fg;
+    background: @bg1;
+}
+
+
+/* ─────────────────────────────────────────────
+   GPU
+   ───────────────────────────────────────────── */
+
+#custom-gpu {
+    color: @purple;
+
+    border-top: 2px solid @purple;
+}
+
+
+/* ─────────────────────────────────────────────
+   CPU
+   ───────────────────────────────────────────── */
+
+#cpu {
+    color: @aqua;
+
+    border-top: 2px solid @aqua;
+}
+
+#cpu.warning {
+    color: @yellow;
+}
+
+#cpu.critical {
+    color: @red;
+}
+
+
+/* ─────────────────────────────────────────────
+   MEMORY
+   ───────────────────────────────────────────── */
+
+#memory {
+    color: @blue;
+
+    border-top: 2px solid @blue;
+}
+
+#memory.warning {
+    color: @yellow;
+}
+
+#memory.critical {
+    color: @red;
+}
+
+
+/* ─────────────────────────────────────────────
+   TEMPERATURE
+   ───────────────────────────────────────────── */
+
+#temperature {
+    color: @orange;
+
+    border-top: 2px solid @orange;
+}
+
+#temperature.critical {
+    color: @red;
+}
+
+
+/* ─────────────────────────────────────────────
+   NETWORK
+   ───────────────────────────────────────────── */
+
+#network {
+    color: @green;
+
+    border-top: 2px solid @green;
+}
+
+#network.disconnected {
+    color: @red;
+}
+
+
+/* ─────────────────────────────────────────────
+   AUDIO
+   ───────────────────────────────────────────── */
+
+#pulseaudio {
+    color: @aqua;
+
+    border-top: 2px solid @aqua;
+}
+
+#pulseaudio.muted {
+    color: @muted;
+}
+
+
+/* ─────────────────────────────────────────────
+   TRAY
+   ───────────────────────────────────────────── */
+
+#tray {
+    color: @fg;
+
+    padding: 0 8px;
+
+    border-top: 2px solid @muted;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+
+/* ─────────────────────────────────────────────
+   TOOLTIPS
+   ───────────────────────────────────────────── */
+
+tooltip {
+    background: @bg0;
+
+    border: 1px solid @bg2;
+
+    padding: 8px;
+}
+
+tooltip label {
+    color: @fg;
+}

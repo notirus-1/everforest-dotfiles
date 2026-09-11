@@ -1,0 +1,269 @@
+{
+    "layer": "top",
+    "position": "top",
+
+    "height": 30,
+    "spacing": 0,
+
+    "margin-top": 6,
+    "margin-left": 8,
+    "margin-right": 8,
+
+   "modules-left": [
+        "niri/workspaces",
+        "niri/window",
+        "mpris"
+    ],
+
+    "modules-center": [
+        "clock"
+    ],
+
+    "modules-right": [
+        "custom/dunst",
+        "custom/gpu",
+        "cpu",
+        "memory",
+        "temperature",
+        "network",
+        "pulseaudio",
+        "tray"
+    ],
+
+    // =========================================================
+    // NIRI WORKSPACES
+    // =========================================================
+
+    "niri/workspaces": {
+        "format": "{icon}",
+
+        "format-icons": {
+            "active": "",
+            "default": "",
+            "urgent": "",
+
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9",
+            "10": "10"
+        }
+    },
+// =========================================================
+    // MPRIS (MEDIA PLAYER)
+    // =========================================================
+
+    "mpris": {
+        "format": "{player_icon} {dynamic}",
+        "format-paused": "{status_icon} <i>{dynamic}</i>",
+        "dynamic-order": ["artist", "title"],
+        "dynamic-len": 35,
+        "player-icons": {
+            "default": "󰎈",
+            "spotify": "",
+            "firefox": "󰈹",
+            "mpv": "󰐌"
+        },
+        "status-icons": {
+            "paused": "󰏤"
+        },
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-click-middle": "playerctl previous",
+        "tooltip-format": "{player} ({status})\n{artist} - {title}\n[{album}]"
+    },
+    
+    // =========================================================
+    // NIRI WINDOW TITLE
+    // =========================================================
+
+    "niri/window": {
+        "format": "{title}",
+        "max-length": 70,
+        "separate-outputs": true
+    },
+
+    // =========================================================
+    // CLOCK
+    // =========================================================
+
+    "clock": {
+        "interval": 1,
+
+        "format": "󰥔 {:%H:%M:%S}",
+        "format-alt": "󰃭 {:%a %d %b}",
+
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+
+            "format": {
+                "months": "<span color='#a7c080'><b>{}</b></span>",
+                "days": "<span color='#d3c6aa'>{}</span>",
+                "weeks": "<span color='#7fbbb3'>W{}</span>",
+                "weekdays": "<span color='#dbbc7f'><b>{}</b></span>",
+                "today": "<span color='#e67e80'><b><u>{}</u></b></span>"
+            }
+        }
+    },
+
+    // =========================================================
+    // DUNST
+    //
+    // Left click   = dismiss all notifications
+    // Right click  = toggle DND/pause
+    // Middle click  = show next notification from history
+    // =========================================================
+
+    "custom/dunst": {
+        "exec": "dunstctl count waiting",
+        "interval": 2,
+
+        "format": "󰂚 {}",
+        "format-empty": "󰂚",
+
+        "return-type": "text",
+
+        "on-click": "dunstctl close-all",
+        "on-click-right": "dunstctl set-paused toggle",
+        "on-click-middle": "dunstctl history-pop",
+
+        "tooltip": true,
+        "tooltip-format": "Left: dismiss all\nRight: toggle DND\nMiddle: show history"
+    },
+
+    // =========================================================
+    // NVIDIA GPU
+    // =========================================================
+
+    "custom/gpu": {
+        "exec": "nvidia-smi --query-gpu=utilization.gpu,temperature.gpu,memory.used,memory.total --format=csv,noheader,nounits | awk -F', ' '{print $1\"% | \"$2\"°C | \"$3\"/\"$4\"MB\"}'",
+        "interval": 2,
+        "format": "󰢮 {}",
+        "return-type": "string",
+        "tooltip": true,
+        "tooltip-format": "NVIDIA GPU\nUtil | Temp | VRAM Used / Total"
+    },
+
+    // =========================================================
+    // CPU
+    // =========================================================
+
+    "cpu": {
+        "interval": 2,
+
+        "format": "󰻠 {usage:>3}%",
+        "format-alt": "󰻠 {usage:>3}%",
+
+        "states": {
+            "warning": 60,
+            "critical": 85
+        },
+
+        "on-click": "kitty -T btop btop",
+
+        "tooltip": true,
+        "tooltip-format": "CPU usage: {usage}%"
+    },
+
+    // =========================================================
+    // MEMORY
+    // =========================================================
+
+    "memory": {
+        "interval": 2,
+
+        "format": " {percentage:>3}%",
+        "format-alt": " {used:0.1f}G / {total:0.1f}G",
+
+        "states": {
+            "warning": 70,
+            "critical": 90
+        },
+
+        "on-click": "kitty -T btop btop",
+
+        "tooltip": true,
+        "tooltip-format": "Memory\nUsed: {used:0.1f} GiB\nAvailable: {avail:0.1f} GiB\nTotal: {total:0.1f} GiB"
+    },
+
+    // =========================================================
+    // TEMPERATURE
+    // =========================================================
+
+    "temperature": {
+        "interval": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 85,
+        "format": " {temperatureC}°C",
+        "format-critical": " {temperatureC}°C",
+        "tooltip": true,
+        "tooltip-format": "CPU Core: {temperatureC}°C"
+    },
+
+    // =========================================================
+    // NETWORK
+    // =========================================================
+
+    "network": {
+        "interval": 2,
+
+        "format-wifi": "󰖩 {essid}",
+        "format-ethernet": "󰈀 {ifname}",
+        "format-linked": "󰈀 {ifname}",
+        "format-disconnected": "󰖪 offline",
+
+        "tooltip-format-wifi": "Wi-Fi\nSSID: {essid}\nSignal: {signalStrength}%\nIP: {ipaddr}\n↓ {bandwidthDownBytes}  ↑ {bandwidthUpBytes}",
+
+        "tooltip-format-ethernet": "Ethernet\nIP: {ipaddr}\n↓ {bandwidthDownBytes}  ↑ {bandwidthUpBytes}",
+
+        "tooltip-format-disconnected": "Network disconnected",
+
+        "on-click": "kitty -T nmtui nmtui"
+    },
+
+    // =========================================================
+    // AUDIO
+    // =========================================================
+
+    "pulseaudio": {
+        "scroll-step": 2,
+
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 muted",
+
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󰋎",
+            "headset": "󰋎",
+            "phone": "",
+            "portable": "󰦧",
+            "car": "",
+
+            "default": [
+                "󰕿",
+                "󰖀",
+                "󰕾"
+            ]
+        },
+
+        "on-click": "pavucontrol"
+    },
+
+    // =========================================================
+    // SYSTEM TRAY
+    // =========================================================
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8
+    }
+}
